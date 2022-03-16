@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Anime() {
@@ -47,7 +49,11 @@ export default function Anime() {
 		newFavorites.unshift(newFavItem)
 		setFavorites(newFavorites);
 		localStorage.setItem('favorites', JSON.stringify(newFavorites))
-	  } 
+		toast("added to fav list!");
+	  }
+	  else{
+		toast("this anime is already in your fav list!");
+	  }
 	}
 	
 	useEffect(() => {
@@ -69,6 +75,7 @@ export default function Anime() {
 			<button onClick={() => addToFav(animeData?.id)}>ajouter aux favoris</button>
 			<button onClick={() => fetchAnime(generateRandomId())}>Suivant</button>
 		  </div>
+		  <ToastContainer />
 		</div>
 	  );
 	}
